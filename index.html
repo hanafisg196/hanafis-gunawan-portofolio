@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Hanafis Gunawan — Fullstack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #1a1a1a;
+            --accent: #7FFF6B;
+            --accent2: #4ef9ff;
+            --text: #f0ede6;
+            --muted: #888880;
+            --border: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2.5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(127, 255, 107, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(127, 255, 107, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(127, 255, 107, 0.08) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            border: 1px solid rgba(127, 255, 107, 0.3);
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 2rem;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent);
+            -webkit-text-stroke: 0;
+        }
+
+        .hero h1 .outline {
+            -webkit-text-stroke: 2px var(--text);
+            color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 560px;
+            color: var(--muted);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 14px 32px;
+            background: var(--accent);
+            color: #0a0a0a;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.15s, opacity 0.15s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--text);
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.2s, transform 0.15s;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* STATS */
+        .stats-bar {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 2.5rem 2.5rem;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 160px;
+            padding: 0 2.5rem;
+            border-right: 1px solid var(--border);
+        }
+
+        .stat:first-child {
+            padding-left: 0;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        .stat-num span {
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--muted);
+            letter-spacing: 0.06em;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        /* SECTIONS COMMON */
+        section {
+            padding: 6rem 2.5rem;
+        }
+
+        .section-tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .section-sub {
+            color: var(--muted);
+            max-width: 480px;
+            font-size: 1rem;
+            margin-bottom: 3.5rem;
+        }
+
+        /* SKILLS */
+        .skills-section {
+            background: var(--bg2);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .skill-card {
+            background: var(--bg2);
+            padding: 2.2rem 2rem;
+            transition: background 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.3s ease;
+        }
+
+        .skill-card:hover {
+            background: var(--bg3);
+        }
+
+        .skill-card:hover::before {
+            height: 100%;
+        }
+
+        .skill-icon {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-name {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-desc {
+            font-size: 0.875rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            padding: 3px 10px;
+            border-radius: 2px;
+            letter-spacing: 0.04em;
+        }
+
+        .tag-green {
+            background: rgba(127, 255, 107, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(127, 255, 107, 0.2);
+        }
+
+        .tag-cyan {
+            background: rgba(78, 249, 255, 0.08);
+            color: var(--accent2);
+            border: 1px solid rgba(78, 249, 255, 0.2);
+        }
+
+        .tag-gray {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(127, 255, 107, 0.2);
+        }
+
+        .project-thumb {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-thumb-inner {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .pt-1 {
+            background: linear-gradient(135deg, #1a2a1a 0%, #0d1f10 100%);
+        }
+
+        .pt-2 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0e1f 100%);
+        }
+
+        .pt-3 {
+            background: linear-gradient(135deg, #2a1a1a 0%, #1f0d0d 100%);
+        }
+
+        .pt-4 {
+            background: linear-gradient(135deg, #1a2a28 0%, #0d1f1d 100%);
+        }
+
+        .project-num {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.875rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: gap 0.2s;
+        }
+
+        .project-link:hover {
+            gap: 10px;
+        }
+
+        /* EXPERIENCE */
+        .exp-section {
+            background: var(--bg2);
+        }
+
+        .exp-list {
+            max-width: 780px;
+        }
+
+        .exp-item {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 2rem;
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .exp-item:last-child {
+            border-bottom: none;
+        }
+
+        .exp-period {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted);
+            letter-spacing: 0.04em;
+            padding-top: 4px;
+        }
+
+        .exp-role {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: -0.01em;
+            margin-bottom: 4px;
+        }
+
+        .exp-company {
+            font-size: 0.875rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+        }
+
+        .exp-desc {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* CONTACT */
+        .contact-section {
+            text-align: center;
+            padding: 8rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(78, 249, 255, 0.06) 0%, transparent 70%);
+            bottom: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .contact-section .section-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+        }
+
+        .contact-email {
+            display: inline-block;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1rem, 3vw, 1.6rem);
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 4px;
+            margin-top: 1.5rem;
+            transition: color 0.2s;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-email:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2.5rem;
+        }
+
+        .social-link {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.06em;
+            padding: 10px 20px;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            transition: color 0.2s, border-color 0.2s;
+            text-transform: uppercase;
+        }
+
+        .social-link:hover {
+            color: var(--text);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 2rem 2.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-text {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--muted);
+            letter-spacing: 0.04em;
+        }
+
+        .footer-text span {
+            color: var(--accent);
+        }
+
+        /* ANIMATIONS */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tag {
+            animation-delay: 0.1s;
+        }
+
+        .hero h1 {
+            animation-delay: 0.2s;
+        }
+
+        .hero-desc {
+            animation-delay: 0.3s;
+        }
+
+        .hero-actions {
+            animation-delay: 0.4s;
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                padding: 1rem 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1.2rem;
+            }
+
+            .stats-bar {
+                padding: 2rem 1.2rem;
+                gap: 1rem;
+            }
+
+            .stat {
+                padding: 0 1.2rem;
+                min-width: 120px;
+            }
+
+            .hero {
+                padding: 7rem 1.2rem 3rem;
+            }
+
+            .exp-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            footer {
+                padding: 1.5rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">Anisukidev<span>.</span>portofolio</div>
+        <ul class="nav-links">
+            <li><a href="#skills">skills</a></li>
+            <li><a href="#projects">projects</a></li>
+            <li><a href="#experience">experience</a></li>
+            <li><a href="#contact">contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <div class="hero-tag fade-up">Available for Work</div>
+            <h1 class="fade-up">
+                <em>Fullstack</em><br>
+                <span class="outline">Developer</span>
+            </h1>
+            <p class="hero-desc fade-up">
+                Membangun aplikasi web & mobile yang cepat, scalable, dan bersih — dari backend Laravel & PHP hingga
+                Android Kotlin dan antarmuka modern.
+            </p>
+            <div class="hero-actions fade-up">
+                <a href="#projects" class="btn-primary">Lihat Projects →</a>
+                <a href="#contact" class="btn-secondary">Hubungi Saya</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-num">4<span>+</span></div>
+            <div class="stat-label">Tahun Pengalaman</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">20<span>+</span></div>
+            <div class="stat-label">Project Selesai</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Tech Stacks Utama</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">100<span>%</span></div>
+            <div class="stat-label">Client Puas</div>
+        </div>
+    </div>
+
+    <!-- SKILLS -->
+    <section id="skills" class="skills-section">
+        <div class="section-tag">// keahlian</div>
+        <h2 class="section-title">Tech Stack</h2>
+        <p class="section-sub">Menguasai berbagai teknologi dari frontend, backend, hingga mobile development.</p>
+        <div class="skills-grid">
+
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
+                        alt="Kotlin" width="50">
+                </div>
+
+                <div class="skill-name">Android — Kotlin</div>
+
+                <div class="skill-desc">
+                    Pengembangan aplikasi Android native menggunakan Kotlin modern,
+                    Jetpack Compose, dan arsitektur MVVM yang clean.
+                </div>
+
+                <div class="skill-tags">
+                    <span class="tag tag-green">Kotlin</span>
+                    <span class="tag tag-green">Jetpack</span>
+                    <span class="tag tag-gray">MVVM</span>
+                    <span class="tag tag-gray">Coroutines</span>
+                    <span class="tag tag-gray">Room</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg"
+                        alt="Laravel" width="50">
+                </div>
+
+                <div class="skill-name">Backend — Laravel</div>
+
+                <div class="skill-desc">
+                    Membangun REST API dan web apps yang robust dengan Laravel,
+                    Eloquent ORM, dan fitur keamanan yang solid.
+                </div>
+
+                <div class="skill-tags">
+                    <span class="tag tag-cyan">Laravel</span>
+                    <span class="tag tag-cyan">PHP</span>
+                    <span class="tag tag-gray">Eloquent</span>
+                    <span class="tag tag-gray">REST API</span>
+                    <span class="tag tag-gray">MySQL</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP"
+                        width="50">
+                </div>
+
+                <div class="skill-name">Web — PHP Native</div>
+
+                <div class="skill-desc">
+                    Pengembangan aplikasi web menggunakan PHP murni maupun framework ringan,
+                    dioptimasi untuk performa dan kemudahan maintenance.
+                </div>
+
+                <div class="skill-tags">
+                    <span class="tag tag-cyan">PHP 8</span>
+                    <span class="tag tag-gray">HTML/CSS</span>
+                    <span class="tag tag-gray">JavaScript</span>
+                    <span class="tag tag-gray">Bootstrap</span>
+                </div>
+            </div>
+
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                        alt="Database" width="50">
+                </div>
+
+                <div class="skill-name">Database & Infra</div>
+
+                <div class="skill-desc">
+                    Merancang skema database yang efisien, query optimization,
+                    dan deployment ke server production dengan workflow CI/CD.
+                </div>
+
+                <div class="skill-tags">
+                    <span class="tag tag-green">MySQL</span>
+                    <span class="tag tag-gray">PostgreSQL</span>
+                    <span class="tag tag-gray">Redis</span>
+                    <span class="tag tag-gray">Git</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="section-tag">// karya</div>
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-sub">Beberapa project terpilih yang menampilkan kemampuan lintas stack.</p>
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <div class="project-thumb pt-1">
+                    <img src="https://play-lh.googleusercontent.com/Yu6le8WzV3Tju3-xgyAQqlLfOQZpU9AfPHi5d1TTN8ziMZrOwR8XN8PWd2TeCPwCwdU=w832-h470-rw"
+                        alt="Anime Wallpaper App">
+                    <div class="project-num">01</div>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-title">+100000 Anime Live Wallpapers</div>
+
+                    <div class="project-desc">
+                        Aplikasi manajemen koleksi wallpaper anime dengan fitur pencarian cepat,
+                        kategori karakter/genre, favorit pengguna, download manager, dan multi-user.
+                    </div>
+
+                    <div class="project-stack">
+                        <span class="tag tag-cyan">Laravel</span>
+                        <span class="tag tag-cyan">PHP</span>
+                        <span class="tag tag-gray">Livewire</span>
+                        <span class="tag tag-gray">Bootstrap 5</span>
+                        <span class="tag tag-gray">MySQL</span>
+                        <span class="tag tag-green">Kotlin</span>
+                        <span class="tag tag-green">Jetpack Compose</span>
+                        <span class="tag tag-green">Koin</span>
+                    </div>
+
+                    <a href="https://play.google.com/store/apps/details?id=com.kyoanime.wallpaper&hl=id"
+                        class="project-link">
+                        Lihat Detail →
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-thumb pt-2">
+                    <img src="https://i.ibb.co.com/gFX3JmyD/Screenshot-2026-05-19-at-09-02-49.png" alt="Oasedukcapil">
+                    <div class="project-num">02</div>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-title">Oasedukcapil</div>
+
+                    <div class="project-desc">
+                        Layanan Administrasi Kependudukan Online yang memudahkan pengurusan
+                        berbagai dokumen kependudukan secara cepat, aman, dan terpercaya.
+                    </div>
+
+                    <div class="project-stack">
+                        <span class="tag tag-green">Laravel</span>
+                        <span class="tag tag-cyan">PHP</span>
+                        <span class="tag tag-gray">Livewire</span>
+                        <span class="tag tag-gray">Bootstrap 5</span>
+                        <span class="tag tag-gray">MySQL</span>
+                    </div>
+
+                    <a href="https://oasedukcapil.tanahdatar.go.id" class="project-link">
+                        Lihat Detail →
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-thumb pt-3">
+                    <img src="https://i.ibb.co.com/6cGwXV3L/Screenshot-2026-05-19-at-09-11-38-1.png"
+                        alt="Portal Tanah Datar">
+                    <div class="project-num">03</div>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-title">Portal Tanah Datar</div>
+
+                    <div class="project-desc">
+                        Portal berita digital yang menyajikan informasi terkini,
+                        terpercaya, dan cepat seputar pemerintahan, masyarakat,
+                        serta perkembangan daerah Tanah Datar.
+                    </div>
+
+                    <div class="project-stack">
+                        <span class="tag tag-cyan">Laravel</span>
+                        <span class="tag tag-gray">Livewire</span>
+                        <span class="tag tag-gray">Bootstrap 5</span>
+                        <span class="tag tag-gray">MySQL</span>
+                    </div>
+
+                    <a href="https://tanahdatar.go.id/" class="project-link">
+                        Lihat Detail →
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-thumb pt-4">
+                    <img src="https://i.ibb.co.com/GYpj61L/Screenshot-2026-05-19-at-09-15-47.png"
+                        alt="SKM Tanah Datar">
+                    <div class="project-num">04</div>
+                </div>
+
+                <div class="project-body">
+                    <div class="project-title">SKM Tanah Datar</div>
+
+                    <div class="project-desc">
+                        Aplikasi Survei Kepuasan Masyarakat untuk mengelola survei layanan publik
+                        secara mudah, cepat, dan transparan dengan laporan real-time.
+                    </div>
+
+                    <div class="project-stack">
+                        <span class="tag tag-cyan">Laravel</span>
+                        <span class="tag tag-gray">Livewire</span>
+                        <span class="tag tag-gray">Bootstrap 5</span>
+                        <span class="tag tag-gray">MySQL</span>
+                    </div>
+
+                    <a href="https://skm.tanahdatar.go.id/" class="project-link">
+                        Lihat Detail →
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="exp-section">
+        <div class="section-tag">// perjalanan</div>
+        <h2 class="section-title">Pengalaman</h2>
+        <p class="section-sub">Rekam jejak profesional dalam dunia pengembangan software.</p>
+        <div class="exp-list">
+
+            <div class="exp-item">
+                <div class="exp-period">2024 — Sekarang</div>
+                <div>
+                    <div class="exp-role">Kominfo Tanah Datar</div>
+                    <div class="exp-company">// Tenaga Ahli Programmer</div>
+                    <div class="exp-desc">Merancang dan mengembangkan aplikasi web serta mobile untuk kebutuhan
+                        pemerintahan daerah Tanah Datar, mencakup sistem kependudukan, portal berita,
+                        dan survei kepuasan masyarakat menggunakan Laravel dan Android Kotlin.</div>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-period">2020 — 2022</div>
+                <div>
+                    <div class="exp-role">Bias Ponsel</div>
+                    <div class="exp-company">// IT Support</div>
+                    <div class="exp-desc">Menangani troubleshooting perangkat keras dan lunak, instalasi sistem,
+                        serta pemeliharaan jaringan dan perangkat komputer di lingkungan toko
+                        ponsel dan layanan pelanggan.</div>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-period">2019 — Sekarang</div>
+                <div>
+                    <div class="exp-role">Google Play Publisher</div>
+                    <div class="exp-company">// Developer & Publisher</div>
+                    <div class="exp-desc">Mengembangkan dan mempublikasikan aplikasi Android secara mandiri
+                        di Google Play Store, dengan total lebih dari 100.000 unduhan. Mengelola
+                        siklus penuh mulai dari development, testing, hingga publishing menggunakan
+                        Kotlin dan Jetpack Compose.</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section">
+        <div class="section-tag">// kontak</div>
+        <h2 class="section-title">Mari Berkolaborasi</h2>
+        <p class="section-sub" style="margin: 1rem auto 0; text-align: center;">Punya project menarik? Saya siap
+            membantu mewujudkan ide Anda menjadi produk nyata.</p>
+        <a href="mailto:halo@devportfolio.id" class="contact-email">hanafisg196@gmail.com</a>
+        <div class="social-links">
+            <a href="https://github.com/hanafisg196" class="social-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/hanafis-gunawan-21b0222a6?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                class="social-link">LinkedIn</a>
+            <a href="https://wa.me/6285263111688" class="social-link">WhatsApp</a>
+            <a href="https://www.instagram.com/hanafisgunawan?igsh=cXFmZGJuMW02dWo5&utm_source=qr"
+                class="social-link">Instagram</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-text">Kotlin · Laravel · PHP · Web</div>
+    </footer>
+
+</body>
+
+</html>
